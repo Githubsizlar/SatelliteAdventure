@@ -7,6 +7,7 @@ public class PlayerMovements : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private Animator anim;
+    private static readonly int IsMoving = Animator.StringToHash("isMoving");
 
     private void Start()
     {
@@ -17,13 +18,13 @@ public class PlayerMovements : MonoBehaviour
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
-        Vector3 direction = new Vector3(horizontal, vertical);
-        transform.position += direction * speed * Time.deltaTime;
+        Vector3 direction = new Vector2(horizontal, vertical);
+        transform.position += direction * (speed * Time.deltaTime);
         
         
         if (horizontal != 0 || vertical != 0)
         {
-            anim.SetBool("isMoving",true);
+            anim.SetBool(IsMoving,true);
             if (horizontal < 0)
             {
                 transform.rotation = Quaternion.Euler(new Vector3(0,180,0));
@@ -36,8 +37,7 @@ public class PlayerMovements : MonoBehaviour
 
         if (horizontal == 0 && vertical == 0)
         {
-            anim.SetBool("isMoving",false);
+            anim.SetBool(IsMoving,false);
         }
-        //anim.SetBool("isMoving",false);
     }
 }

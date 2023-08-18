@@ -1,18 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private static CancellationTokenSource GeneralCancellationTokenSource { get; } = new CancellationTokenSource();
+    private IContext _finalContext = null!;
+    
+    [SerializeField] private GameObject spaceShip = null!;
+    [SerializeField] private GameObject player = null!;
+    private CancellationTokenSource StateCancellationTokenSource { get; set; } = null!;
+    
+    public void Start()
     {
-        
+        StateCancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(GeneralCancellationTokenSource.Token);
+        _finalContext = new Context(spaceShip, player);
+        _finalContext.TransitionTo(new FallingFromShip2());
+        _ = _finalContext.RunStateAsync(StateCancellationTokenSource.Token);
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    private void OnApplicationQuit()
     {
-        
+        GeneralCancellationTokenSource.Cancel();
+        GeneralCancellationTokenSource.Dispose();
     }
 }
