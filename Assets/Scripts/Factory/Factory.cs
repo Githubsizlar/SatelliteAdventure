@@ -11,7 +11,7 @@ namespace Factory
 
         public static IFactory Instance { get; private set; } = new Factory();
 
-        public Factory()
+        private Factory()
         {
             GameObject[] allPrefabs = Resources.LoadAll<GameObject>("");
             foreach (GameObject prefab in allPrefabs)
@@ -31,7 +31,7 @@ namespace Factory
             MonoBehaviour? obj = _prefabs.Find(x => x.GetType().Equals(type) );
             if (obj == null)
             {
-                Debug.Log($"Object not found: {type.GetType().FullName}");
+                Debug.Log($"Object not found: {type.FullName}");
                 return default;
             }
             return (T)UnityEngine.Object.Instantiate(obj);
@@ -59,7 +59,7 @@ namespace Factory
             MonoBehaviour? obj = _prefabs.Find(x => x.GetType().Equals(type));
             if (obj == null)
             {
-                Debug.Log($"Object not found: {type.GetType().FullName}");
+                Debug.Log($"Object not found: {type.FullName}");
                 return default;
             }
 
