@@ -1,8 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using State;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,6 +19,7 @@ public class GameManager : MonoBehaviour
     
     public void Start()
     {
+       
         
         StateCancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(GeneralCancellationTokenSource.Token);
         _finalContext = new Context(spaceShip, player,talkWithNativesPanel);
@@ -27,5 +31,20 @@ public class GameManager : MonoBehaviour
     {
         GeneralCancellationTokenSource.Cancel();
         GeneralCancellationTokenSource.Dispose();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            talkWithNativesPanel.SetActive(true);
+            player.gameObject.transform.parent = default;
+            player.gameObject.transform.position = new Vector3(0.4f, 1, 0);
+        }
+    }
+
+    public void PassIntoPlacingHomeDraft()
+    {
+        talkWithNativesPanel.SetActive(false);
     }
 }
