@@ -7,6 +7,8 @@ public class PlayerMovements : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private Animator anim;
+    
+    
     private static readonly int IsMoving = Animator.StringToHash("isMoving");
 
     private void Start()

@@ -10,6 +10,7 @@ public interface IContext
         
     public GameObject SpaceShip { get; set; }
     public GameObject Player { get; set; }
+    public  GameObject TalkWithNativesPanel { get; set; }
 }
 
 public class Context : IContext
@@ -18,12 +19,14 @@ public class Context : IContext
 
     public GameObject SpaceShip { get; set; }
     public GameObject Player { get; set; }
+    public GameObject TalkWithNativesPanel { get; set; }
 
 
-    public Context(GameObject spaceShip, GameObject player)
+    public Context(GameObject spaceShip, GameObject player, GameObject talkWithNativesPanel)
     {
         SpaceShip = spaceShip;
         Player = player;
+        TalkWithNativesPanel = talkWithNativesPanel;
     }
         
 
