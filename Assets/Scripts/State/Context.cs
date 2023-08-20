@@ -1,5 +1,7 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
+using Interfaces.Type;
 using UnityEngine;
 
 public interface IContext 
@@ -11,6 +13,7 @@ public interface IContext
     public GameObject SpaceShip { get; set; }
     public GameObject Player { get; set; }
     public  GameObject TalkWithNativesPanel { get; set; }
+    public List<Native> Natives { get; set; }
 }
 
 public class Context : IContext
@@ -20,13 +23,15 @@ public class Context : IContext
     public GameObject SpaceShip { get; set; }
     public GameObject Player { get; set; }
     public GameObject TalkWithNativesPanel { get; set; }
+    public List<Native> Natives { get; set; }
 
 
-    public Context(GameObject spaceShip, GameObject player, GameObject talkWithNativesPanel)
+    public Context(GameObject spaceShip, GameObject player, GameObject talkWithNativesPanel, List<Native> natives)
     {
         SpaceShip = spaceShip;
         Player = player;
         TalkWithNativesPanel = talkWithNativesPanel;
+        Natives = natives;
     }
         
 

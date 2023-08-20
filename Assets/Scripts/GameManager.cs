@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using DG.Tweening;
+using Interfaces.Type;
 using State;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
@@ -15,6 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject spaceShip = null!;
     [SerializeField] private GameObject player = null!;
     [SerializeField] private GameObject talkWithNativesPanel = null!;
+    [SerializeField] private List<Native> Natives;
     private CancellationTokenSource StateCancellationTokenSource { get; set; } = null!;
     
     public void Start()
@@ -22,7 +25,7 @@ public class GameManager : MonoBehaviour
        
         
         StateCancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(GeneralCancellationTokenSource.Token);
-        _finalContext = new Context(spaceShip, player,talkWithNativesPanel);
+        _finalContext = new Context(spaceShip, player,talkWithNativesPanel, Natives);
         _finalContext.TransitionTo(new FallingFromShip2());
         _ = _finalContext.RunStateAsync(StateCancellationTokenSource.Token);
     }
@@ -35,7 +38,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && Natives != null)
         {
             talkWithNativesPanel.SetActive(true);
             player.gameObject.transform.parent = default;
@@ -46,5 +49,13 @@ public class GameManager : MonoBehaviour
     public void PassIntoPlacingHomeDraft()
     {
         talkWithNativesPanel.SetActive(false);
+        for (int i = Natives.Count-1; i >= 0; i--)
+        {
+            Natives[i].gameObject.transform.rotation = new Quaternion(0,-180,0,0);
+            Natives[i].gameObject.transform.DOMove(new Vector3(-10, 0, 0), 2f);
+            Destroy(Natives[i].gameObject,.5f);
+        }
+
+        Natives = null;
     }
 }
