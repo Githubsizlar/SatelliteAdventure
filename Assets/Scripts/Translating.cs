@@ -7,6 +7,6 @@ public class Translating : MonoBehaviour
     
     public void TranslateText()
     {
-        text.text = "Natives: Welcome to our planet";
+        text.text = "Natives: Fuck you Madafaka";
     }
 }
