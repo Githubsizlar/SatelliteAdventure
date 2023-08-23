@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Interfaces.Type;
+using Type;
 using UnityEngine;
 
 public interface IContext 

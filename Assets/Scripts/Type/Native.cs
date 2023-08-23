@@ -1,8 +1,6 @@
-﻿using System;
-using DG.Tweening;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Interfaces.Type
+namespace Type
 {
     public class Native : MonoBehaviour
     {

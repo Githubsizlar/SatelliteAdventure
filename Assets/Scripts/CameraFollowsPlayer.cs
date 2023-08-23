@@ -1,19 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
-using DG.Tweening;
 using UnityEngine;
 
 public class CameraFollowsPlayer : MonoBehaviour
 {
-    public Transform target;           // The player's transform to follow
-    public Vector3 offset = new Vector3(0, 0, -10); // Offset from the player's position
+    public Transform target;           
+    public Vector3 offset = new(0, 0, -10); 
 
     [Range(0, 1)]
-    public float smoothSpeed = 0.125f; // Smoothing factor for camera movement
+    public float smoothSpeed = 0.125f;
+
+    private bool _istargetNull;
+
+    private void Start()
+    {
+        _istargetNull = target == null;
+    }
 
     private void LateUpdate()
     {
-        if (target == null)
+        if (_istargetNull)
             return;
 
         Vector3 desiredPosition = target.position + offset;

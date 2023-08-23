@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using DG.Tweening;
-using Interfaces.Type;
-using UnityEngine;
-using Vector3 = System.Numerics.Vector3;
+using Type;
+
 
 namespace State
 {

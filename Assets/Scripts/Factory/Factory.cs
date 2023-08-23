@@ -27,7 +27,7 @@ namespace Factory
 
         public T CreateObject<T>() where T : MonoBehaviour
         {
-            Type type = typeof(T);
+            System.Type type = typeof(T);
             MonoBehaviour? obj = _prefabs.Find(x => x.GetType().Equals(type) );
             if (obj == null)
             {
@@ -43,7 +43,7 @@ namespace Factory
         }
         public T CreateObject<T>( Transform parent) where T : MonoBehaviour
         {
-            Type type = typeof(T);
+            System.Type type = typeof(T);
             MonoBehaviour? obj = _prefabs.Find(x => x.GetType().Equals(type) );
             if (obj == null)
             {
@@ -55,7 +55,7 @@ namespace Factory
         }
         public T CreateObject<T>(int varianId, Transform parent) where T : MonoBehaviour
         {
-            Type type = typeof(T);
+            System.Type type = typeof(T);
             MonoBehaviour? obj = _prefabs.Find(x => x.GetType().Equals(type));
             if (obj == null)
             {
