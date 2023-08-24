@@ -7,6 +7,8 @@ public class PlayerMovements : MonoBehaviour
     [SerializeField] private Animator anim;
 
     [SerializeField] private GameObject homePanel;
+    
+    public Inventory inventory;
 
     public int playerEnergy;
     public int playerHealth;
@@ -19,6 +21,12 @@ public class PlayerMovements : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
+    private void Awake()
+    {
+        /*How many slot inventory have I gave it 10 */
+        inventory = new Inventory(10);
+    }
+    
     void Update()
     {
         float horizontal = Input.GetAxisRaw("Horizontal");

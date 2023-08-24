@@ -48,6 +48,7 @@ public class Inventory
     //Maybe do serialize
     public void Add(CollectableType typeToAdd)
     {
+        CollectableType col = new CollectableType();
         foreach(Slot slot in slots)
         {
             if (slot.type == typeToAdd && slot.CanAddItem()) 
@@ -58,7 +59,7 @@ public class Inventory
         }
         foreach(Slot slot in slots)
         {
-            if (slot.type == Collectable.NONE)
+            if (slot.type == CollectableType.NONE)
             {
                 slot.AddItem(typeToAdd);
                 return;
