@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Interfaces
+namespace Factory
 {
     public interface IFactory 
     {

@@ -38,16 +38,8 @@ namespace Managers
 
         private void Update()
         {
-            //TODO:Create Apples
-            // int appleCounter = 10;
-            //
-            // for (int i = 0; i < appleCounter; i++)
-            // {
-            //     AppleCreation();
-            // }
-            //
-        
-        
+
+            
             if (Input.GetKeyDown(KeyCode.Space) && natives != null)
             {
                 talkWithNativesPanel.SetActive(true);

@@ -1,30 +1,33 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 
-public interface IGameState
+namespace State
 {
-    public void SetContext(IContext context);
-    public Task RunStateAsync(CancellationToken cancellationToken = default);
-}
+    public interface IGameState
+    {
+        public void SetContext(IContext context);
+        public Task RunStateAsync(CancellationToken cancellationToken = default);
+    }
     
-public abstract class GameState : IGameState
-{
-    protected static IContext Context { get; private set; } = null!;
-
-    protected GameState()
+    public abstract class GameState : IGameState
     {
-        //$"New state: {GetType().Name}".PrintToConsoleInfo();
-    }
+        protected static IContext Context { get; private set; } = null!;
 
-    ~GameState()
-    {
-        //$"{GetType().FullName} destroyed and collected!".PrintToConsole();
-    }
+        protected GameState()
+        {
+            //$"New state: {GetType().Name}".PrintToConsoleInfo();
+        }
+
+        ~GameState()
+        {
+            //$"{GetType().FullName} destroyed and collected!".PrintToConsole();
+        }
         
-    public void SetContext(IContext context)
-    {
-        Context = context;
-    }
+        public void SetContext(IContext context)
+        {
+            Context = context;
+        }
 
-    public abstract Task RunStateAsync(CancellationToken cancellationToken = default);
+        public abstract Task RunStateAsync(CancellationToken cancellationToken = default);
+    }
 }
