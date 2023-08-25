@@ -37,11 +37,7 @@ namespace UI
                 {
                     if (player.inventory.slots[i].type != CollectableType.NONE)
                     {
-                        slots[i].SetItem(player.inventory.slots[i]);
-                    }
-                    else
-                    {
-                        slots[i].SetEmpty();
+
                     }
                 }
             }

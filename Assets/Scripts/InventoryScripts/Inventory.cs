@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace InventoryScripts
 {
@@ -14,7 +13,6 @@ namespace InventoryScripts
             public CollectableType type;
             public int count; /*How many items in the slot*/
             public int maxAllowed;
-            public Sprite icon;
             public Slot()
             {
                 type = CollectableType.NONE;
@@ -29,10 +27,9 @@ namespace InventoryScripts
                 }
                 return false;
             }
-            public void AddItem(Collectable item)
+            public void AddItem(CollectableType type)
             {
-                this.type = item.type;
-                this.icon = item.icon;
+                this.type = type;
                 count++;
             }
         }
@@ -50,14 +47,14 @@ namespace InventoryScripts
         }
 
         //Maybe do serialize
-        public void Add(Collectable item)
+        public void Add(CollectableType typeToAdd)
         {
             CollectableType col = new CollectableType();
             foreach(Slot slot in slots)
             {
-                if (slot.type == item.type && slot.CanAddItem()) 
+                if (slot.type == typeToAdd && slot.CanAddItem()) 
                 {
-                    slot.AddItem(item);
+                    slot.AddItem(typeToAdd);
                     return;
                 }
             }
@@ -65,7 +62,7 @@ namespace InventoryScripts
             {
                 if (slot.type == CollectableType.NONE)
                 {
-                    slot.AddItem(item);
+                    slot.AddItem(typeToAdd);
                     return;
                 }
             }

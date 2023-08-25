@@ -7,7 +7,6 @@ namespace InventoryScripts
     public class Collectable : MonoBehaviour
     {
         public CollectableType type;
-        public Sprite icon;
 
         public PlayerMovements player;
         
@@ -15,8 +14,8 @@ namespace InventoryScripts
         {
             if (other.collider.CompareTag("Player"))
             {
-                player.inventory.Add(this);
-                Destroy(this.gameObject);
+                player.inventory.Add(type);
+                Destroy(gameObject);
             }
         }
     }
