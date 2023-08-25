@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace InventoryScripts
 {
@@ -13,6 +14,7 @@ namespace InventoryScripts
             public CollectableType type;
             public int count; /*How many items in the slot*/
             public int maxAllowed;
+            public Sprite icon;
             public Slot()
             {
                 type = CollectableType.NONE;

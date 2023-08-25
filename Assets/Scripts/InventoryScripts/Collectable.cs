@@ -7,6 +7,7 @@ namespace InventoryScripts
     public class Collectable : MonoBehaviour
     {
         public CollectableType type;
+        public Sprite icon;
 
         public PlayerMovements player;
         
