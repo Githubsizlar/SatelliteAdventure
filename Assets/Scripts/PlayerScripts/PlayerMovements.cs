@@ -8,7 +8,20 @@ namespace PlayerScripts
         [SerializeField] private float speed;
         [SerializeField] private Animator anim;
 
+        #region Panels
         [SerializeField] private GameObject homePanel;
+        [SerializeField] private GameObject nativeHomePanel1;
+        [SerializeField] private GameObject nativeHomePanel2;
+        [SerializeField] private GameObject nativeHomePanel3;
+        #endregion
+
+        #region Homes
+
+        [SerializeField] private GameObject home1;
+        [SerializeField] private GameObject home2;
+        [SerializeField] private GameObject home3;
+
+        #endregion
     
         public Inventory inventory;
 
@@ -17,9 +30,13 @@ namespace PlayerScripts
     
     
         private static readonly int IsMoving = Animator.StringToHash("isMoving");
+        private Camera camera1;
+        private bool iscamera1NotNull;
 
         private void Start()
         {
+            iscamera1NotNull = camera1 != null;
+            camera1 = Camera.main;
             anim = GetComponent<Animator>();
         }
 
@@ -55,12 +72,11 @@ namespace PlayerScripts
                 anim.SetBool(IsMoving,false);
             }
             
-            //Raycast
             if (Input.GetMouseButtonDown(0))
             {
-                if (Camera.main != null)
+                if (iscamera1NotNull)
                 {
-                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    Ray ray = camera1.ScreenPointToRay(Input.mousePosition);
                     RaycastHit hit;
 
                     if (Physics.Raycast(ray, out hit))
@@ -68,7 +84,6 @@ namespace PlayerScripts
                         if (hit.collider.CompareTag("Apple"))
                         {
                             Destroy(hit.collider.gameObject);
-                            Debug.Log("OLDU ANAM OLDU");
                         }
                     }
                 }
@@ -82,15 +97,35 @@ namespace PlayerScripts
             {
                 homePanel.SetActive(true);
             }
-        
+
+            if (other.collider.CompareTag($"NativeHome1"))
+            {
+                nativeHomePanel1.SetActive(true);
+                nativeHomePanel1.transform.SetParent(home1.transform);
+                nativeHomePanel1.transform.localPosition = Vector3.zero;
+            }
+
+            if (other.collider.CompareTag($"NativeHome2"))
+            {
+                nativeHomePanel2.SetActive(true);
+                nativeHomePanel2.transform.SetParent(home2.transform);
+                nativeHomePanel2.transform.localPosition = Vector3.zero;
+            }
+
+            if (other.collider.CompareTag($"NativeHome3"))
+            {
+                nativeHomePanel3.SetActive(true);
+                nativeHomePanel3.transform.SetParent(home3.transform);
+                nativeHomePanel3.transform.localPosition = Vector3.zero;
+            }
         }
 
         private void OnCollisionExit2D(Collision2D other)
         {
-            if (other.collider.CompareTag($"HomePanelTrigger"))
-            {
-                homePanel.SetActive(false);
-            }
+            if (other.collider.CompareTag($"HomePanelTrigger")) homePanel.SetActive(false);
+            if (other.collider.CompareTag($"NativeHome1")) nativeHomePanel1.SetActive(false);
+            if (other.collider.CompareTag($"NativeHome2")) nativeHomePanel2.SetActive(false);
+            if (other.collider.CompareTag($"NativeHome3")) nativeHomePanel3.SetActive(false);
         }
     }
 }

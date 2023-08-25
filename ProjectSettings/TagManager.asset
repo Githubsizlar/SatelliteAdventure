@@ -6,6 +6,9 @@ TagManager:
   tags:
   - HomePanelTrigger
   - Apple
+  - NativeHome1
+  - NativeHome2
+  - NativeHome3
   layers:
   - Default
   - TransparentFX

@@ -10,7 +10,7 @@ namespace Managers
     public class GameManager : MonoBehaviour
     {
         private static CancellationTokenSource GeneralCancellationTokenSource { get; } = new CancellationTokenSource();
-        private IContext _finalContext = null!;
+        private IContext finalContext = null!;
 
         #region ContextPrefs
         [SerializeField] private GameObject spaceShip = null!;
@@ -25,9 +25,9 @@ namespace Managers
         public void Start()
         {
             StateCancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(GeneralCancellationTokenSource.Token);
-            _finalContext = new Context(spaceShip, player,talkWithNativesPanel, natives);
-            _finalContext.TransitionTo(new FallingFromShip2());
-            _ = _finalContext.RunStateAsync(StateCancellationTokenSource.Token);
+            finalContext = new Context(spaceShip, player,talkWithNativesPanel, natives);
+            finalContext.TransitionTo(new FallingFromShip2());
+            _ = finalContext.RunStateAsync(StateCancellationTokenSource.Token);
         }
     
         private void OnApplicationQuit()
