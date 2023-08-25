@@ -9,15 +9,17 @@ namespace InventoryScripts
         public Transform[] spawnPoints;
 
         private Apple _currentApple;
+        private bool _isCurrentAppleNull;
 
         void Start()
         {
+            _isCurrentAppleNull = _currentApple == null;
             SpawnApple();
         }
 
         void Update()
         {
-            if (_currentApple == null)
+            if (_isCurrentAppleNull)
             {
                 SpawnApple();
             }
@@ -27,8 +29,6 @@ namespace InventoryScripts
         {
             int randomIndex = Random.Range(0, spawnPoints.Length);
             Vector3 spawnPosition = spawnPoints[randomIndex].position;
-            // _currentApple = Factory.Factory.Instance.CreateObject<Apple>();
-            // _currentApple.transform.position = spawnPosition;
             _currentApple = Instantiate(applePrefab, spawnPosition, Quaternion.identity);
         }
     }

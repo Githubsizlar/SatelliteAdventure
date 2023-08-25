@@ -1,43 +1,47 @@
-using System.Collections;
 using System.Collections.Generic;
+using InventoryScripts;
+using PlayerScripts;
 using UnityEngine;
 
-public class Inventory_UI : MonoBehaviour
+namespace UI
 {
-    public GameObject inventoryPanel;
-    public PlayerMovement player;
-    public List<Slot_UI> slots = new List<Slot_UI>();
-
-    // Update is called once per frame
-    void Update()
+    public class InventoryUI : MonoBehaviour
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
-        { ToggleInventory(); }
-    }
-    public void ToggleInventory()
-    {
-        if (!inventoryPanel.activeSelf)
-        { inventoryPanel.SetActive(true);
-            Setup();
-        }
-        else
+        public GameObject inventoryPanel;
+        public PlayerMovements player;
+        public List<Slot_UI> slots = new List<Slot_UI>();
+        
+        void Update()
         {
-            inventoryPanel.SetActive(false);
+            if (Input.GetKeyDown(KeyCode.Tab))
+            { ToggleInventory(); }
         }
 
-    }
-    void Setup()
-    {
-        if (slots.Count == player.inventory.slots.Count)
+        private void ToggleInventory()
         {
-            for (int i = 0; i < slots.Count; i++)
+            if (!inventoryPanel.activeSelf)
+            { inventoryPanel.SetActive(true);
+                Setup();
+            }
+            else
             {
-                if (player.inventory.slots[i].type != CollectableType.NONE)
-                {
+                inventoryPanel.SetActive(false);
+            }
 
+        }
+        void Setup()
+        {
+            if (slots.Count == player.inventory.slots.Count)
+            {
+                for (int i = 0; i < slots.Count; i++)
+                {
+                    if (player.inventory.slots[i].type != CollectableType.NONE)
+                    {
+
+                    }
                 }
             }
-        }
  
+        }
     }
 }
