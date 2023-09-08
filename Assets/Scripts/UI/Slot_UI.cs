@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using InventoryScripts;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Slot_UI : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start(){
     public Image itemIcon;
     public TextMeshProUGUI quantityText;
 
+    /*Set icon and quantity*/
     public void SetItem(Inventory.Slot slot)
     {
 
@@ -21,12 +24,12 @@ public class Slot_UI : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
     public void SetEmpty()
     {
 
-        itemIcon.sprite = null;
-        itemIcon.color = new Color(1, 1, 1, 0);
-        quantityText.text = "";
+            itemIcon.sprite = null;
+            /*make the image invisible */
+            itemIcon.color = new Color(1, 1, 1, 0);
+            quantityText.text = "";
     }
 }

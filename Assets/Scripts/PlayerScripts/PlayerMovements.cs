@@ -25,8 +25,8 @@ namespace PlayerScripts
 
         private void Awake()
         {
-            /*How many slot inventory have I gave it 10 */
-            inventory = new Inventory(10);
+            /*How many slot inventory have I gave it 21 */
+            inventory = new Inventory(21);
         }
     
         void Update()

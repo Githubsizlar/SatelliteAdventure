@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace InventoryScripts
 {
+    /* to see all of the slots in inspector*/
     [System.Serializable]
 // no mono we're not gonna add inventory script of the game objects.
     public class Inventory
@@ -14,7 +15,9 @@ namespace InventoryScripts
             public CollectableType type;
             public int count; /*How many items in the slot*/
             public int maxAllowed;
+            
             public Sprite icon;
+            /*Actually we do not need contructor in C#*/
             public Slot()
             {
                 type = CollectableType.NONE;
@@ -29,9 +32,10 @@ namespace InventoryScripts
                 }
                 return false;
             }
-            public void AddItem(CollectableType type)
+            public void AddItem(Collectable item)
             {
-                this.type = type;
+                this.type = item.type;
+                this.icon = item.icon;
                 count++;
             }
         }
@@ -49,14 +53,15 @@ namespace InventoryScripts
         }
 
         //Maybe do serialize
-        public void Add(CollectableType typeToAdd)
+        /* Instead of the type we need actual item */ 
+        public void Add(Collectable item)
         {
             CollectableType col = new CollectableType();
             foreach(Slot slot in slots)
             {
-                if (slot.type == typeToAdd && slot.CanAddItem()) 
+                if (slot.type == item.type && slot.CanAddItem()) 
                 {
-                    slot.AddItem(typeToAdd);
+                    slot.AddItem(item);
                     return;
                 }
             }
@@ -64,7 +69,7 @@ namespace InventoryScripts
             {
                 if (slot.type == CollectableType.NONE)
                 {
-                    slot.AddItem(typeToAdd);
+                    slot.AddItem(item);
                     return;
                 }
             }

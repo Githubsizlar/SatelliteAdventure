@@ -11,13 +11,21 @@ namespace InventoryScripts
 
         public PlayerMovements player;
         
-        private void OnCollisionEnter2D(Collision2D other)
+        private void OnTriggerEnter2D(Collider2D collision)
         {
+            player = collision.GetComponent<PlayerMovements>();
+            if (player)
+            {
+                player.inventory.Add(this);
+                Destroy(this.gameObject);
+            }
+            /*
             if (other.collider.CompareTag("Player"))
             {
-                player.inventory.Add(type);
+                player.inventory.Add(this);
                 Destroy(gameObject);
             }
+            */
         }
     }
     
